@@ -61,4 +61,83 @@ public class ProductRepositoryTest {
         assertEquals(product2.getProductId(), savedProduct.getProductId());
         assertFalse(productIterator.hasNext());
     }
+
+    @Test
+    void testEditSuccessful() {
+        Product product = new Product();
+        product.setProductId("ebb558egf-1c39-460e-8860-71af6af63bd6");
+        product.setProductName("Sampo Cap Bambang");
+        product.setProductQuantity(100);
+        productRepository.create(product);
+
+        product.setProductName("Sampo Cap Pacil");
+        product.setProductQuantity(200);
+        Product editedProduct = productRepository.edit(product);
+
+        assertNotNull(editedProduct);
+        assertEquals("Sampo Cap Pacil", editedProduct.getProductName());
+        assertEquals(200, editedProduct.getProductQuantity());
+        Iterator<Product> productIterator = productRepository.findAll();
+        assertTrue(productIterator.hasNext());
+        Product savedProduct = productIterator.next();
+        assertEquals("Sampo Cap Pacil", savedProduct.getProductName());
+        assertEquals(200, savedProduct.getProductQuantity());
+        assertEquals(product.getProductId(), savedProduct.getProductId());
+    }
+
+    @Test
+    void testEditNonExistentProduct() {
+        Product nonExistentProduct = new Product();
+        nonExistentProduct.setProductId("23213213-2132-1321-2132-132132132132");
+        nonExistentProduct.setProductName("I bet on losing dogs");
+        nonExistentProduct.setProductQuantity(100);
+
+        Product result = productRepository.edit(nonExistentProduct);
+        assertNull(result);
+        Iterator<Product> productIterator = productRepository.findAll();
+        assertFalse(productIterator.hasNext());
+    }
+
+    @Test
+    void testDeleteSuccessful() {
+        Product product = new Product();
+        product.setProductId("2321321534-2132-1321-2132-132132132132");
+        product.setProductName("Feather");
+        product.setProductQuantity(100);
+        productRepository.create(product);
+
+        Iterator<Product> beforeDelete = productRepository.findAll();
+        assertTrue(beforeDelete.hasNext());
+        Product savedProduct = beforeDelete.next();
+        assertEquals(product.getProductId(), savedProduct.getProductId());
+
+        productRepository.delete(product);
+        Iterator<Product> afterDelete = productRepository.findAll();
+        assertFalse(afterDelete.hasNext());
+    }
+
+    @Test
+    void testDeleteNonExistentProduct() {
+        Product nonExistentProduct = new Product();
+        nonExistentProduct.setProductId("34324324-2132-1321-2132-132132132132");
+        nonExistentProduct.setProductName("Mama I'm in love with a criminal");
+        nonExistentProduct.setProductQuantity(100);
+
+        productRepository.delete(nonExistentProduct);
+        Iterator<Product> productIterator = productRepository.findAll();
+        assertFalse(productIterator.hasNext());
+    }
+
+    @Test
+    void testEditDoesNotCreateNewProduct() {
+        Product product = new Product();
+        product.setProductId("87687687-2132-1321-2132-132132132132");
+        product.setProductName("Class of 2019");
+        product.setProductQuantity(100);
+
+        Product editResult = productRepository.edit(product);
+        assertNull(editResult);
+        Iterator<Product> productIterator = productRepository.findAll();
+        assertFalse(productIterator.hasNext());
+    }
 }
