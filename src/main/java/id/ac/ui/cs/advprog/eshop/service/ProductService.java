@@ -8,4 +8,5 @@ public interface ProductService {
     public List<Product> findAll();
     public Product edit(Product product);
     public Product findById(String productId);
+    void delete(Product product);
 }
