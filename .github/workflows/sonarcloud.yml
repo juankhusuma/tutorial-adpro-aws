@@ -43,6 +43,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
       - name: Analyze with SonarCloud
 
         # You can pin the exact commit or the version.
@@ -62,12 +65,16 @@ jobs:
             # Comma-separated paths to directories containing test source files.
             #-Dsonar.tests= # optional. For more info about Code Coverage, please refer to https://docs.sonarcloud.io/enriching/test-coverage/overview/
           # Adds more detail to both client and server-side analysis logs, activating DEBUG mode for the scanner, and adding client-side environment variables and system properties to the server-side log of analysis report processing.
-          #-Dsonar.verbose= # optional, default is false
+            -Dsonar.verbose=true
+            -Dsonar.analysis.resultFile=results.sarif
+            -Dsonar.externalIssuesReportPaths=results.sarif
+            -Dsonar.sarif.path=results.sarif
           # When you need the analysis to take place in a directory other than the one from which it was launched, default is .
           projectBaseDir: .
 
 
       - name: Upload SARIF file
         uses: github/codeql-action/upload-sarif@v3
+        if: always()
         with:
-          sarif_file: ${{ github.workspace }}/results.sarif
+          sarif_file: results.sarif
