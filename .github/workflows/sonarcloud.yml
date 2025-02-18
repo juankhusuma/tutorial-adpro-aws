@@ -18,22 +18,33 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+
+      - name: Build with Gradle
+        run: ./gradlew build
+
       - name: Analyze with SonarCloud
         uses: SonarSource/sonarcloud-github-action@4006f663ecaf1f8093e8e4abb9227f6041f52216
         env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
           args: >
             -Dsonar.projectKey=gracekarinn_adpro
             -Dsonar.organization=gracekarinn
+            -Dsonar.java.binaries=build/classes/java/main
+            -Dsonar.java.test.binaries=build/classes/java/test
+            -Dsonar.sources=src/main/java/
+            -Dsonar.tests=src/test/java/
             -Dsonar.verbose=true
-            -Dsonar.analysis.resultFile=results.sarif
-            -Dsonar.externalIssuesReportPaths=results.sarif
-            -Dsonar.sarif.path=results.sarif
-          projectBaseDir: .
+            -Dsonar.sarif.path=build/sonar/sarif-report.json
 
       - name: Upload SARIF file
         uses: github/codeql-action/upload-sarif@v3
         if: always()
         with:
-          sarif_file: results.sarif
+          sarif_file: build/sonar/sarif-report.json
