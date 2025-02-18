@@ -99,6 +99,49 @@ public class ProductRepositoryTest {
     }
 
     @Test
+    void testEditWithNullId() {
+        Product product = new Product();
+        product.setProductId("3459230459023");
+        product.setProductName("Original Name");
+        product.setProductQuantity(100);
+        productRepository.create(product);
+
+        Product productWithNullId = new Product();
+        productWithNullId.setProductId(null);
+        productWithNullId.setProductName("Test Name");
+        productWithNullId.setProductQuantity(200);
+
+        Product result = productRepository.edit(productWithNullId);
+        assertNull(result);
+
+        Iterator<Product> productIterator = productRepository.findAll();
+        assertTrue(productIterator.hasNext());
+        Product unchangedProduct = productIterator.next();
+        assertEquals("Original Name", unchangedProduct.getProductName());
+        assertEquals(100, unchangedProduct.getProductQuantity());
+    }
+
+    @Test
+    void testEditWithNullProduct() {
+        Product result = productRepository.edit(null);
+        assertNull(result);
+    }
+
+    @Test
+    void testEditProductInEmptyList() {
+        Product product = new Product();
+        product.setProductId("250804-32432-345231");
+        product.setProductName("Test Product");
+        product.setProductQuantity(100);
+
+        Product result = productRepository.edit(product);
+        assertNull(result);
+
+        Iterator<Product> productIterator = productRepository.findAll();
+        assertFalse(productIterator.hasNext());
+    }
+
+    @Test
     void testDeleteSuccessful() {
         Product product = new Product();
         product.setProductId("2321321534-2132-1321-2132-132132132132");
@@ -139,5 +182,91 @@ public class ProductRepositoryTest {
         assertNull(editResult);
         Iterator<Product> productIterator = productRepository.findAll();
         assertFalse(productIterator.hasNext());
+    }
+
+    @Test
+    void testFindByIdFound() {
+        Product product = new Product();
+        product.setProductId("231231-2132-1321-2132-132132132132");
+        product.setProductName("Show me how");
+        product.setProductQuantity(100);
+        productRepository.create(product);
+
+        Product foundProduct = productRepository.findById("231231-2132-1321-2132-132132132132");
+
+        assertNotNull(foundProduct);
+        assertEquals("231231-2132-1321-2132-132132132132", foundProduct.getProductId());
+        assertEquals("Show me how", foundProduct.getProductName());
+        assertEquals(100, foundProduct.getProductQuantity());
+    }
+
+    @Test
+    void testFindByIdNotFound() {
+        Product foundProduct = productRepository.findById("7876867-2132-1321-2132-132132132132");
+
+        assertNull(foundProduct);
+    }
+
+    @Test
+    void testFindByIdWithMultipleProducts() {
+        Product product1 = new Product();
+        product1.setProductId("7654756-2132-1321-2132-132132132132");
+        product1.setProductName("Product 1");
+        product1.setProductQuantity(100);
+        productRepository.create(product1);
+
+        Product product2 = new Product();
+        product2.setProductId("8768956-2132-1321-2132-132132132132");
+        product2.setProductName("Product 2");
+        product2.setProductQuantity(200);
+        productRepository.create(product2);
+
+        Product foundProduct = productRepository.findById("8768956-2132-1321-2132-132132132132");
+
+        assertNotNull(foundProduct);
+        assertEquals("8768956-2132-1321-2132-132132132132", foundProduct.getProductId());
+        assertEquals("Product 2", foundProduct.getProductName());
+        assertEquals(200, foundProduct.getProductQuantity());
+    }
+
+    @Test
+    void testFindByIdWithEmptyRepository() {
+        Product foundProduct = productRepository.findById("32131243452-2132-1321-2132-132132132132");
+
+        assertNull(foundProduct);
+    }
+
+    @Test
+    void testEditAndFindById() {
+        Product product = new Product();
+        product.setProductId("0980756785-2132-1321-2132-132132132132");
+        product.setProductName("Original Name");
+        product.setProductQuantity(100);
+        productRepository.create(product);
+
+        product.setProductName("Updated Name");
+        product.setProductQuantity(200);
+        productRepository.edit(product);
+
+        Product foundProduct = productRepository.findById("0980756785-2132-1321-2132-132132132132");
+
+        assertNotNull(foundProduct);
+        assertEquals("Updated Name", foundProduct.getProductName());
+        assertEquals(200, foundProduct.getProductQuantity());
+    }
+
+    @Test
+    void testDeleteAndFindById() {
+        Product product = new Product();
+        product.setProductId("435435432-2132-1321-2132-132132132132");
+        product.setProductName("Ariana Grande");
+        product.setProductQuantity(100);
+        productRepository.create(product);
+
+        productRepository.delete(product);
+
+        Product foundProduct = productRepository.findById("435435432-2132-1321-2132-132132132132");
+
+        assertNull(foundProduct);
     }
 }
