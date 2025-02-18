@@ -36,6 +36,7 @@ on:
 
 permissions:
   pull-requests: read # allows SonarCloud to decorate PRs with analysis results
+  security-events: write
 
 jobs:
   Analysis:
@@ -64,3 +65,9 @@ jobs:
           #-Dsonar.verbose= # optional, default is false
           # When you need the analysis to take place in a directory other than the one from which it was launched, default is .
           projectBaseDir: .
+
+
+      - name: Upload SARIF file
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: ${{ github.workspace }}/results.sarif
