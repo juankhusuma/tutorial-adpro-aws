@@ -66,3 +66,5 @@ Ketika diminta untuk membuat fungsional test baru yang memverifikasi jumlah item
 - **Menggunakan Base Test Class**: Buat base class untuk *functional test* yang berisi metode setup yang dapat digunakan kembali oleh semua *test suite*.
 - **Refactor dengan Utility Methods**: Jika ada prosedur umum yang sering digunakan, buat metode *utility* agar tidak perlu menyalin kode yang sama ke berbagai kelas.
 - **Gunakan Parameterized Tests**: Jika ada banyak skenario yang mirip, gunakan parameterized tests untuk menghindari kode yang berulang.
+
+# **REFLECTION 3**
