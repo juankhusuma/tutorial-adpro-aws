@@ -79,4 +79,16 @@ Selain itu, saya juga melakukan perbaikan pada **`EshopApplicationTests`** denga
 
 Selanjutnya, saya menambahkan **pengujian pada `ProductTest`** untuk memastikan bahwa metode **`getProductById` dan `getProductByName`** bekerja dengan baik. Saya membuat beberapa skenario untuk menguji apakah metode tersebut dapat mengembalikan produk yang sesuai berdasarkan ID dan nama yang diberikan.
 
-Terakhir, saya juga menambahkan **pengujian untuk `testGetProductQuantity`** untuk memastikan bahwa jumlah produk yang dikembalikan sesuai dengan data yang dibuat sebelumnya. Dengan semua perbaikan ini, saya berhasil mencapai 100% code coverage yang memastikan bahwa setiap fungsionalitas dalam aplikasi telah diuji secara menyeluruh
+Terakhir, saya juga menambahkan **pengujian untuk `testGetProductQuantity`** untuk memastikan bahwa jumlah produk yang dikembalikan sesuai dengan data yang dibuat sebelumnya. Dengan semua perbaikan ini, saya berhasil mencapai 100% code coverage yang memastikan bahwa setiap fungsionalitas dalam aplikasi telah diuji secara menyeluruh.
+
+---
+
+Berdasarkan implementasi **CI/CD** yang telah saya lakukan, saya yakin bahwa pipeline saat ini telah memenuhi definisi **Continuous Integration (CI) dan Continuous Deployment (CD)**.
+
+Pertama, setiap perubahan kode yang di-push ke repository akan secara otomatis memicu **build dan testing** memastikan bahwa kode baru tidak merusak fitur yang sudah ada. 
+
+Kedua, saya telah menambahkan **code scanning dan analisis kualitas kode** menggunakan alat seperti **SonarCloud** yang membantu mengidentifikasi potensi masalah dalam kode sebelum proses deployment. 
+
+Ketiga, saya telah mengimplementasikan mekanisme **auto-deploy ke PaaS**, sehingga setiap perubahan yang berhasil melewati tahap pengujian dan analisis akan langsung dideploy ke lingkungan production tanpa intervensi manual.
+
+Dengan seluruh proses ini, pipeline saya telah mendukung **Continuous Integration** dengan memastikan bahwa kode diuji dan dianalisis setiap kali ada perubahan. Selain itu, **Continuous Deployment** juga tercapai karena setiap perubahan yang lolos testing dapat langsung dideploy di production environment.
