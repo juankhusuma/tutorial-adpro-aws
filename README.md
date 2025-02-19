@@ -68,3 +68,15 @@ Ketika diminta untuk membuat fungsional test baru yang memverifikasi jumlah item
 - **Gunakan Parameterized Tests**: Jika ada banyak skenario yang mirip, gunakan parameterized tests untuk menghindari kode yang berulang.
 
 # **REFLECTION 3**
+
+Selama proses latihan ini, saya pertama kali mendapatkan **coverage sebesar 42%** karena banyak kode yang belum ter-cover. Setelah menyadari hal ini, saya melakukan **review ulang** terhadap kode yang telah saya tulis untuk mengidentifikasi bagian yang belum diuji.
+
+Strategi yang saya gunakan untuk memperbaikinya adalah dengan **menambahkan metode pengujian tambahan** di `ProductRepositoryTest`. Method ini secara spesifik meng-cover skenario yang sebelumnya terlewat. Saya memastikan bahwa setiap metode dalam repository diuji, termasuk kasus sukses maupun gagal.
+
+Kemudian, saya juga menambahkan **pengujian pada `ProductControllerTest`** untuk memastikan bahwa setiap endpoint telah berfungsi dengan benar. Saya memeriksa apakah response status yang dikembalikan sesuai dengan yang diharapkan,.
+
+Selain itu, saya juga melakukan perbaikan pada **`EshopApplicationTests`** dengan menambahkan **`assertNotNull`**. Hal ini bertujuan untuk memastikan bahwa aplikasi dapat berjalan tanpa error saat diinisialisasi.
+
+Selanjutnya, saya menambahkan **pengujian pada `ProductTest`** untuk memastikan bahwa metode **`getProductById` dan `getProductByName`** bekerja dengan baik. Saya membuat beberapa skenario untuk menguji apakah metode tersebut dapat mengembalikan produk yang sesuai berdasarkan ID dan nama yang diberikan.
+
+Terakhir, saya juga menambahkan **pengujian untuk `testGetProductQuantity`** untuk memastikan bahwa jumlah produk yang dikembalikan sesuai dengan data yang dibuat sebelumnya. Dengan semua perbaikan ini, saya berhasil mencapai 100% code coverage yang memastikan bahwa setiap fungsionalitas dalam aplikasi telah diuji secara menyeluruh
