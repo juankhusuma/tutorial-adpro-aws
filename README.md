@@ -69,19 +69,21 @@ Ketika diminta untuk membuat fungsional test baru yang memverifikasi jumlah item
 
 # **REFLECTION 3**
 
+---
+
+## **Reflection on Code Coverage**
+
 Selama proses latihan ini, saya pertama kali mendapatkan **coverage sebesar 42%** karena banyak kode yang belum ter-cover. Setelah menyadari hal ini, saya melakukan **review ulang** terhadap kode yang telah saya tulis untuk mengidentifikasi bagian yang belum diuji.
 
-Strategi yang saya gunakan untuk memperbaikinya adalah dengan **menambahkan metode pengujian tambahan** di `ProductRepositoryTest`. Method ini secara spesifik meng-cover skenario yang sebelumnya terlewat. Saya memastikan bahwa setiap metode dalam repository diuji, termasuk kasus sukses maupun gagal.
+Strategi yang saya gunakan untuk memperbaikinya adalah dengan **menambahkan testing tambahan** di `ProductRepositoryTest`. Method ini secara spesifik meng-cover skenario yang sebelumnya terlewat, seperti menambahkan test edit dan find by id. Saya memastikan bahwa setiap metode dalam repository diuji, termasuk kasus sukses maupun gagal.
 
-Kemudian, saya juga menambahkan **pengujian pada `ProductControllerTest`** untuk memastikan bahwa setiap endpoint telah berfungsi dengan benar. Saya memeriksa apakah response status yang dikembalikan sesuai dengan yang diharapkan,.
+Kemudian, saya juga menambahkan **testing pada `ProductControllerTest`** untuk memastikan bahwa setiap endpoint telah berfungsi dengan benar. Saya memeriksa apakah response status yang dikembalikan sesuai dengan yang diharapkan,.
 
 Selain itu, saya juga melakukan perbaikan pada **`EshopApplicationTests`** dengan menambahkan **`assertNotNull`**. Hal ini bertujuan untuk memastikan bahwa aplikasi dapat berjalan tanpa error saat diinisialisasi.
 
-Selanjutnya, saya menambahkan **pengujian pada `ProductTest`** untuk memastikan bahwa metode **`getProductById` dan `getProductByName`** bekerja dengan baik. Saya membuat beberapa skenario untuk menguji apakah metode tersebut dapat mengembalikan produk yang sesuai berdasarkan ID dan nama yang diberikan.
+Dengan semua perbaikan ini, saya berhasil mencapai **100%** code coverage yang memastikan bahwa setiap fungsionalitas dalam aplikasi telah diuji secara menyeluruh.
 
-Terakhir, saya juga menambahkan **pengujian untuk `testGetProductQuantity`** untuk memastikan bahwa jumlah produk yang dikembalikan sesuai dengan data yang dibuat sebelumnya. Dengan semua perbaikan ini, saya berhasil mencapai 100% code coverage yang memastikan bahwa setiap fungsionalitas dalam aplikasi telah diuji secara menyeluruh.
-
----
+## **Reflection on CI/CD**
 
 Berdasarkan implementasi **CI/CD** yang telah saya lakukan, saya yakin bahwa pipeline saat ini telah memenuhi definisi **Continuous Integration (CI) dan Continuous Deployment (CD)**.
 
@@ -89,6 +91,6 @@ Pertama, setiap perubahan kode yang di-push ke repository akan secara otomatis m
 
 Kedua, saya telah menambahkan **code scanning dan analisis kualitas kode** menggunakan alat seperti **SonarCloud** yang membantu mengidentifikasi potensi masalah dalam kode sebelum proses deployment. 
 
-Ketiga, saya telah mengimplementasikan mekanisme **auto-deploy ke PaaS**, sehingga setiap perubahan yang berhasil melewati tahap pengujian dan analisis akan langsung dideploy ke lingkungan production tanpa intervensi manual.
+Ketiga, saya telah mengimplementasikan mekanisme **auto-deploy ke PaaS**, sehingga setiap perubahan yang berhasil melewati tahap testing dan analisis akan langsung dideploy ke lingkungan production tanpa intervensi manual.
 
 Dengan seluruh proses ini, pipeline saya telah mendukung **Continuous Integration** dengan memastikan bahwa kode diuji dan dianalisis setiap kali ada perubahan. Selain itu, **Continuous Deployment** juga tercapai karena setiap perubahan yang lolos testing dapat langsung dideploy di production environment.
