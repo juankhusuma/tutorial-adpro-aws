@@ -3,8 +3,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Getter @Setter
-public class Car extends Entity {
-    private String name;
-    private String color;
-    private int quantity;
+public class Car {
+    private String carId;
+    private String carName;
+    private String carColor;
+    private int carQuantity;
 }
