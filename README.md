@@ -94,3 +94,49 @@ Kedua, saya telah menambahkan **code scanning dan analisis kualitas kode** mengg
 Ketiga, saya telah mengimplementasikan mekanisme **auto-deploy ke PaaS**, sehingga setiap perubahan yang berhasil melewati tahap testing dan analisis akan langsung dideploy ke lingkungan production tanpa intervensi manual.
 
 Dengan seluruh proses ini, pipeline saya telah mendukung **Continuous Integration** dengan memastikan bahwa kode diuji dan dianalisis setiap kali ada perubahan. Selain itu, **Continuous Deployment** juga tercapai karena setiap perubahan yang lolos testing dapat langsung dideploy di production environment.
+
+# **REFLECTION 4**
+
+---
+
+#### Prinsip yang Diterapkan
+
+1. **Single Responsibility Principle (SRP)**  
+   Pemisahan halaman terkait seperti **Homepage**, **Car**, dan **Product** ke dalam **controller** masing-masing bertujuan agar setiap controller memiliki satu tanggung jawab utama dan tidak bercampur dengan tugas lainnya.
+
+2. **Interface Segregation Principle (ISP)**  
+   Dibuat layanan terpisah untuk **CarService** dan **ProductService** karena setiap layanan hanya memerlukan satu jenis implementasi tanpa harus bergantung pada layanan yang tidak dibutuhkan.
+
+3. **Dependency Inversion Principle (DIP)**  
+   Pada **CarController**, ketergantungan terhadap implementasi spesifik **CarServiceImpl** dihapus dan digantikan dengan **interface** sehingga pengendalian ketergantungan dilakukan melalui abstraksi.
+
+4. **Open/Closed Principle (OCP)**  
+   Metode **update()** dibuat pada model sehingga subclass tidak perlu mengubah perilaku utama model tersebut. Subclass cukup melakukan override pada metode ini untuk memperbarui data yang dibutuhkan.
+
+#### Manfaat Menerapkan Prinsip SOLID
+
+**Mengapa Harus Menerapkannya?**
+
+- **Single Responsibility Principle (SRP)**: Setiap kelas hanya memiliki satu alasan untuk berubah, sehingga lebih mudah dikelola dan tidak mempengaruhi bagian lain dari sistem.
+- **Open/Closed Principle (OCP)**: Memungkinkan ekstensi fitur tanpa harus memodifikasi kode yang sudah ada, menjaga stabilitas sistem.
+- **Liskov Substitution Principle (LSP)**: Memastikan bahwa objek dari superclass dapat digantikan oleh objek dari subclass tanpa mengganggu jalannya program.
+- **Interface Segregation Principle (ISP)**: Mencegah kelas dari keharusan mengimplementasikan metode yang tidak dibutuhkan, sehingga tetap ringan dan modular.
+- **Dependency Inversion Principle (DIP)**: Mengurangi ketergantungan antara modul tinggi dan rendah dengan menggunakan abstraksi, meningkatkan fleksibilitas dan kemudahan pemeliharaan.  
+
+#### Contoh Dampak Tanpa Prinsip SOLID
+
+Tanpa menerapkan prinsip SOLID, kode dapat mengalami berbagai permasalahan:
+
+1. Jika satu kelas memiliki banyak tanggung jawab (melanggar SRP), perubahan kecil bisa berdampak besar ke berbagai bagian kode lainnya.
+
+2. Jika kode tidak mengikuti OCP, maka setiap perubahan fitur mengharuskan modifikasi kode lama dan meningkatkan risiko bug.
+
+3.  Jika aturan LSP tidak diterapkan dengan baik, subclass mungkin tidak dapat digunakan sebagai pengganti superclass tanpa menyebabkan error.
+
+4. Tanpa ISP, kelas akan dipaksa mengimplementasikan metode yang tidak diperlukan, membuat kode sulit dikelola.
+
+5. Jika DIP tidak diterapkan, modul tingkat tinggi akan bergantung langsung pada modul tingkat rendah menyebabkan perubahan kecil bisa berdampak besar.
+
+6. Struktur kode yang buruk akan membuat semakin sulit dipahami, memperlambat pengembangan, dan meningkatkan kemungkinan kesalahan.
+
+7.  Ketergantungan yang tinggi antara berbagai komponen dapat mempersulit pengujian unit sehingga proses debugging menjadi lebih kompleks.
