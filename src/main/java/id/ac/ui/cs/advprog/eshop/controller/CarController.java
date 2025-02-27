@@ -1,4 +1,5 @@
 package id.ac.ui.cs.advprog.eshop.controller;
+
 import id.ac.ui.cs.advprog.eshop.service.CarService;
 import id.ac.ui.cs.advprog.eshop.model.Car;
 
@@ -11,15 +12,20 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/car")
-public class CarController  {
+public class CarController {
+
+    private final CarService carService;
+
     @Autowired
-    private CarService carService;
+    public CarController(CarService carService) {
+        this.carService = carService;
+    }
 
     @GetMapping("/createCar")
     public String createCarPage(Model model) {
         Car car = new Car();
         model.addAttribute("car", car);
-        return  "CreateCar";
+        return "CreateCar";
     }
 
     @PostMapping("/createCar")
@@ -39,12 +45,11 @@ public class CarController  {
     public String editCarPage(@PathVariable String carId, Model model) {
         Car car = carService.findById(carId);
         model.addAttribute("car", car);
-        return  "EditCar";
+        return "EditCar";
     }
 
     @PostMapping("/editCar")
     public String editCarPost(@ModelAttribute Car car, Model model) {
-        System.out.println(car.getCarId());
         carService.update(car.getCarId(), car);
         return "redirect:/car/listCar";
     }
