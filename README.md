@@ -1,4 +1,4 @@
-# **REFLECTION 1**
+# **REFLECTION 1 (module 1)**
 
 Dalam tugas ini, beberapa prinsip *clean code* telah diterapkan:
 
@@ -41,7 +41,7 @@ Kemudian, untuk kode create saya menambahkan UUID set product agar pada saat pro
 ```
 
 
-# **REFLECTION 2**
+# **REFLECTION 2 (module 1)**
 
 ---
 
@@ -67,7 +67,7 @@ Ketika diminta untuk membuat fungsional test baru yang memverifikasi jumlah item
 - **Refactor dengan Utility Methods**: Jika ada prosedur umum yang sering digunakan, buat metode *utility* agar tidak perlu menyalin kode yang sama ke berbagai kelas.
 - **Gunakan Parameterized Tests**: Jika ada banyak skenario yang mirip, gunakan parameterized tests untuk menghindari kode yang berulang.
 
-# **REFLECTION 3**
+# **REFLECTION 3 (module 2)**
 
 ---
 
@@ -95,7 +95,7 @@ Ketiga, saya telah mengimplementasikan mekanisme **auto-deploy ke PaaS**, sehing
 
 Dengan seluruh proses ini, pipeline saya telah mendukung **Continuous Integration** dengan memastikan bahwa kode diuji dan dianalisis setiap kali ada perubahan. Selain itu, **Continuous Deployment** juga tercapai karena setiap perubahan yang lolos testing dapat langsung dideploy di production environment.
 
-# **REFLECTION 4**
+# **REFLECTION 4 (module 3)**
 
 ---
 
@@ -140,3 +140,14 @@ Tanpa menerapkan prinsip SOLID, kode dapat mengalami berbagai permasalahan:
 6. Struktur kode yang buruk akan membuat semakin sulit dipahami, memperlambat pengembangan, dan meningkatkan kemungkinan kesalahan.
 
 7.  Ketergantungan yang tinggi antara berbagai komponen dapat mempersulit pengujian unit sehingga proses debugging menjadi lebih kompleks.
+
+# **REFLECTION 5 (module 4)**
+
+---
+
+Dalam implementasi ini, pendekatan Test-Driven Development (TDD) telah diterapkan dengan baik, dimulai dari penulisan unit test (OrderServiceImplTest), pembuatan interface (OrderService), hingga implementasi (OrderServiceImpl). Pendekatan ini membantu mendefinisikan perilaku yang diharapkan sejak awal, memastikan bahwa setiap metode memiliki tujuan yang jelas sebelum diimplementasikan. Selain itu, test yang dibuat telah mencakup berbagai skenario, termasuk kasus normal maupun edge cases seperti status tidak valid atau order yang tidak ditemukan.
+
+Jika dilihat dari prinsip F.I.R.S.T. (Fast, Independent, Repeatable, Self-validating, Timely), unit test ini telah memenuhi sebagian besar aspek, seperti fast (dengan mocking repository), independent, repeatable, dan memiliki validasi yang jelas. Namun, masih ada beberapa area yang dapat diperbaiki, seperti pengurangan setup yang berlebihan, lebih spesifik dalam assertion, serta memastikan setiap test benar-benar terisolasi dengan baik. Untuk peningkatan ke depan, bisa dipertimbangkan penggunaan test parameterized untuk menguji berbagai input dengan lebih efisien, serta penyusunan test berdasarkan perilaku yang diuji agar lebih mudah dipahami.
+
+Pendekatan ini sudah SOLID dalam menerapkan TDD dan prinsip unit testing dengan ruang perbaikan dalam pengembangan yang lebih incremental, pengorganisasian test yang lebih baik, dan peningkatan dalam refactoring setelah implementasi.
+
